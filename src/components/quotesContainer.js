@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import Quote from './quote';
 
+//Icons
+import ArrowRight from "@material-ui/icons/DoubleArrow"
+import ReadMore from './readMore';
+
 export default function QuotesContainer() {
   //States
   const [randomQuote, setRandomQuote] = useState({})
+  const [authorQuotes, setAuthorQuotes] = useState([])
+  const [author, setAuthor] = useState("")
   const [error, setError] = useState("")
+  
+  // Functions
+
+
 
   //useEffects
   useEffect(() => {
@@ -14,11 +24,27 @@ export default function QuotesContainer() {
       .catch(err => setError(err))
   }, [])
 
-  console.log(error)
+  useEffect(() => {
+    setAuthor(randomQuote.quoteAuthor)
+    author &&
+    fetch(`https://quote-garden.herokuapp.com/api/v3/quotes?author=${author}&limit=5`)
+      .then(res => res.json())
+      .then(res => setAuthorQuotes(res.data))
+      .catch(err => setError(err))
+  }, [author, randomQuote])
+  
+  console.log(authorQuotes)
+
+
 
   return (
     <section>
-      <Quote randomQuote={randomQuote} />
+      <div class="quote-container">
+        <Quote randomQuote={randomQuote}/>
+        <ReadMore randomQuote={randomQuote}>
+          <ArrowRight />
+        </ReadMore>
+      </div>
     </section>
   )
 }

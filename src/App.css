@@ -19,14 +19,15 @@ section {
 
 .quote-container {
   max-width: 675px;
-  padding: 0 2em;
-  border: 1px solid seagreen;
+  /* border: 1px solid seagreen; */
 }
 
 .quote-text {
   position: relative;
   font-family: "Raleway", sans-serif;
   font-size: 2.25rem;
+  margin: 0;
+  padding: 0 0.5em;
 }
 
 .quote-text::before {
@@ -36,4 +37,23 @@ section {
   width: 10px;
   left: -100px;
   background: #f7df94;
+}
+
+.rm-container {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  width: 100%;
+  margin-top: 4em;
+  text-align: left;
+  padding: 2em 0.875em;
+  border: 0;
+  background: none;
+}
+
+.rm-text {
+}
+.rm-title {
+}
+.rm-subtitle {
 }
