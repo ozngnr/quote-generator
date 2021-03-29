@@ -1,11 +1,13 @@
 import React from 'react';
 
 
-export default function Quote({randomQuote}) {
+export default function Quote({quote}) {
+  const { quoteText } = quote
+
   return (
     <>
-      <div className="quote-container">
-        <p className="quote-text">"{randomQuote.quoteText}"</p>
+      <div style={{ marginBottom: "120px"}}>
+        <p className="quote-text">"{quoteText}"</p>
       </div>
     </>
   )

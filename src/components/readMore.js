@@ -1,13 +1,17 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom"
+import DoubleArrow from "@material-ui/icons/DoubleArrow";
 
-export default function ReadMore({ children, randomQuote, onClick}) {
+export default function ReadMore({ randomQuote }) {
+  const { quoteAuthor, quoteGenre } = randomQuote
+
   return (
-    <div className="rm-container" onClick={onClick}>
-      <div className="rm-text">
-        <h2 className="rm-text_author">{randomQuote.quoteAuthor}</h2>
-        <p className="rm-text_genre">{randomQuote.quoteGenre}</p>
-      </div>
-      {children}
-    </div>
+    <Link to={`/quotes-by-${quoteAuthor}`} className="rm-button">
+      <span>
+        <span className="rm-text_author">{quoteAuthor}</span>
+        <span className="rm-text_genre">{quoteGenre}</span>
+      </span>
+      <DoubleArrow />
+    </Link>
   )
 };

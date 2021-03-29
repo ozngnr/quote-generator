@@ -4,7 +4,7 @@ import QuotesContainer from './components/quotesContainer';
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <QuotesContainer />
     </div>
   );
