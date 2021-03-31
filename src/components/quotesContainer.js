@@ -1,63 +1,97 @@
 import React, { useState, useEffect } from 'react';
-import {Switch, Route} from "react-router-dom"
+import { Switch, Route } from "react-router-dom";
+import { BarsSpinner } from "react-spinners-kit";
+
 import Quote from './quote';
 import ReadMore from './readMore';
 import Header from './header';
 import Footer from './footer';
+import styled from 'styled-components';
  
 export default function QuotesContainer() {
   //States
-  const [randomQuote, setRandomQuote] = useState({})
+  const [quote, setQuote] = useState({})
   const [authorQuotes, setAuthorQuotes] = useState([])
-  const [author, setAuthor] = useState("")
+  const [fetchCount, setFetchCount] = useState(0)
   const [error, setError] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   
   // Functions
 
-
+  function handleRenewQuote() {
+    setIsLoading(true)
+    setFetchCount(prevCount => prevCount + 1)
+  }
 
   //useEffects
   useEffect(() => {
     fetch("https://quote-garden.herokuapp.com/api/v3/quotes/random")
       .then(res => res.json())
-      .then(res => setRandomQuote(...res.data))
+      .then(res => {
+        setQuote(...res.data)
+        setIsLoading(false)
+      })
       .catch(err => setError(err))
-  }, [setIsLoading])
+  }, [fetchCount])
 
   useEffect(() => {
-    setAuthor(randomQuote.quoteAuthor)
-    author &&
-    fetch(`https://quote-garden.herokuapp.com/api/v3/quotes?author=${author}&limit=5`)
+    fetch(`https://quote-garden.herokuapp.com/api/v3/quotes?author=${quote.quoteAuthor}&limit=5`)
       .then(res => res.json())
-      .then(res => setAuthorQuotes(res.data))
+      .then(res => {
+        setAuthorQuotes(res.data)
+      })
       .catch(err => setError(err))
-  }, [author, randomQuote])
-  
-  
-  console.log(authorQuotes)
-  console.log(error)
+  }, [quote])
 
   return (
-    <div className="site-wrapper">
-      <Header />
+    <Wrapper>
+      <Header handleRenewQuote={handleRenewQuote}/>
       {
-      // isLoading ? <h1>Loading...</h1> :
+      isLoading ? <Section><BarsSpinner size={100} color={`#f7df94`} /></Section> :
+      error ? <Section><Error>Seems like we can't get a quote at the moment. Please try again later.</Error></Section> :
+
       <Switch>
         <Route exact path="/">
-          <section>
-            <Quote quote={randomQuote} />
-            <ReadMore randomQuote={randomQuote} />
-          </section>
+          <Section>
+            <Quote quote={quote} />
+            <ReadMore quote={quote} />
+          </Section>
         </Route>
-        <Route exact path={`/quotes-by-${author}`}>
-          <section>
-            <h1 className="section-title">{author}</h1>
+        <Route exact path={`/quotes-by-${quote.quoteAuthor}`}>
+          <Section>
+            <Title>{quote.quoteAuthor}</Title>
             {authorQuotes.map(quote => <Quote key={quote._id} quote={quote}/>)}
-          </section>
+          </Section>
         </Route>
-      </Switch>}
+      </Switch>
+
+      }
       <Footer />
-    </div>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+`;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  max-width: 675px;
+  margin: auto;
+`;
+
+const Title = styled.h1`
+  font-size: 2.25rem;
+  color: #333333;
+  margin-bottom: 3.875em;
+  padding: 0 1em;
+`
+
+const Error = styled.h1``
