@@ -24,13 +24,13 @@ const Link = styled(RouterLink)`
   text-decoration: none;
   width: 100%;
   padding: 3em 2em;
-  color: #4f4f4f;
+  color: ${({theme}) => theme.text};
   cursor: pointer;
 
   &:hover,
   &:focus {
-    color: #f2f2f2;
-    background: #333333;
+    color: ${({theme}) => theme.body};
+    background: ${({theme}) => theme.text};
   }
 `
 
@@ -43,6 +43,6 @@ const AuthorName = styled(Span)`
   margin-bottom: 0.25em;
 `
 const Genre = styled(Span)`
-  color: #828282;
+  color: ${({theme}) => theme.accent};
   font-size: 0.875rem;
 `

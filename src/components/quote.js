@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export default function Quote({quote}) {
   const { quoteText } = quote
-
+  
   return (
     <Container style={{ marginBottom: "120px"}}>
       <Text className="quote-text">"{quoteText}"</Text>
@@ -26,6 +26,6 @@ const Text = styled.p`
     height: 100%;
     width: 8px;
     left: -100px;
-    background: #f7df94;
+    background: ${({theme}) => theme.accent};
   }
 `

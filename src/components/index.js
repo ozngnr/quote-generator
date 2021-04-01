@@ -1,0 +1,5 @@
+export {default as Header} from "./header"
+export {default as Footer} from "./footer"
+export {default as Quote} from "./quote"
+export {default as ReadMore} from "./readMore"
+export {default as Toggle} from "./toggle"

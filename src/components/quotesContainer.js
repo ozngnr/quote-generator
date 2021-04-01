@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Switch, Route } from "react-router-dom";
+import styled, { ThemeContext } from 'styled-components';
 import { BarsSpinner } from "react-spinners-kit";
 
-import Quote from './quote';
-import ReadMore from './readMore';
-import Header from './header';
-import Footer from './footer';
-import styled from 'styled-components';
+import { Header, Footer, Quote, ReadMore } from "../components"
  
-export default function QuotesContainer() {
+export default function QuotesContainer({theme, toggleTheme}) {
+  const { accent } = useContext(ThemeContext) // get accent color for BarsSpinner
+
   //States
   const [quote, setQuote] = useState({})
   const [authorQuotes, setAuthorQuotes] = useState([])
@@ -17,7 +16,6 @@ export default function QuotesContainer() {
   const [isLoading, setIsLoading] = useState(true)
   
   // Functions
-
   function handleRenewQuote() {
     setIsLoading(true)
     setFetchCount(prevCount => prevCount + 1)
@@ -47,7 +45,7 @@ export default function QuotesContainer() {
     <Wrapper>
       <Header handleRenewQuote={handleRenewQuote}/>
       {
-      isLoading ? <Section><BarsSpinner size={100} color={`#f7df94`} /></Section> :
+      isLoading ? <Section><BarsSpinner size={100} color={accent} /></Section> :
       error ? <Section><Error>Seems like we can't get a quote at the moment. Please try again later.</Error></Section> :
 
       <Switch>
@@ -89,7 +87,7 @@ const Section = styled.section`
 
 const Title = styled.h1`
   font-size: 2.25rem;
-  color: #333333;
+  color: ${({theme}) => theme.text};
   margin-bottom: 3.875em;
   padding: 0 1em;
 `

@@ -13,6 +13,12 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Raleway", sans-serif;
   }
 
+  body {
+    background: ${({theme}) => theme.body};
+    color: ${({theme}) => theme.text};
+    transition: background 0.3s ease;
+  }
+
   h1,
   h2,
   h3,
