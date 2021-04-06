@@ -44,10 +44,14 @@ const IconWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  border-radius: 50%;
   color: ${({theme}) => theme.text};
   top: ${({active}) => active ? "0" : "100%"};
-  transition: all 0.3s ease;
-  border-radius: 50%;
+  -webkit-transition: .3s ease-in-out;
+  -moz-transition:    .3s ease-in-out;
+  -ms-transition:     .3s ease-in-out;
+  -o-transition:      .3s ease-in-out;
+  transition:         .3s ease-in-out;
 `
 
 

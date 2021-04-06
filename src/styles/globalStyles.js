@@ -16,7 +16,11 @@ export const GlobalStyles = createGlobalStyle`
   body {
     background: ${({theme}) => theme.body};
     color: ${({theme}) => theme.text};
-    transition: background 0.3s ease;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition:    background .3s ease-in-out;
+    -ms-transition:     background .3s ease-in-out;
+    -o-transition:      background .3s ease-in-out;
+    transition:         background .3s ease-in-out;
   }
 
   h1,

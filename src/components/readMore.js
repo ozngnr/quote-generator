@@ -26,6 +26,11 @@ const Link = styled(RouterLink)`
   padding: 3em 2em;
   color: ${({theme}) => theme.text};
   cursor: pointer;
+  -webkit-transition: .1s ease-in-out;
+  -moz-transition:    .1s ease-in-out;
+  -ms-transition:     .1s ease-in-out;
+  -o-transition:      .1s ease-in-out;
+  transition:         .1s ease-in-out;
 
   &:hover,
   &:focus {

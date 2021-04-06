@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import styled, { ThemeContext } from 'styled-components';
 import { BarsSpinner } from "react-spinners-kit";
 
 import { Header, Footer, Quote, ReadMore } from "../components"
  
-export default function QuotesContainer({theme, toggleTheme}) {
+export default function QuotesContainer() {
   const { accent } = useContext(ThemeContext) // get accent color for BarsSpinner
 
   //States
@@ -43,6 +43,7 @@ export default function QuotesContainer({theme, toggleTheme}) {
 
   return (
     <Wrapper>
+      <Redirect to="/" />
       <Header handleRenewQuote={handleRenewQuote}/>
       {
       isLoading ? <Section><BarsSpinner size={100} color={accent} /></Section> :
