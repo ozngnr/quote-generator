@@ -47,11 +47,11 @@ const IconWrapper = styled.div`
   border-radius: 50%;
   color: ${({theme}) => theme.text};
   top: ${({active}) => active ? "0" : "100%"};
-  -webkit-transition: .3s ease-in-out;
-  -moz-transition:    .3s ease-in-out;
-  -ms-transition:     .3s ease-in-out;
-  -o-transition:      .3s ease-in-out;
-  transition:         .3s ease-in-out;
+  -webkit-transition: top .3s ease-in-out;
+  -moz-transition:    top .3s ease-in-out;
+  -ms-transition:     top .3s ease-in-out;
+  -o-transition:      top .3s ease-in-out;
+  transition:         top .3s ease-in-out;
 `
 
 
@@ -62,6 +62,11 @@ const Input = styled.input.attrs(props => ({
   opacity: 0;
   width:0;
   height:0;
+
+  &:focus ~ ${IconWrapper} {
+    border: 2px solid blue;
+    /* border: 50px;  */
+  }
 `
 
 

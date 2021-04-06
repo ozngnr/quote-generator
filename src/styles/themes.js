@@ -8,5 +8,5 @@ export const lightTheme = {
 export const darkTheme = {
   body: "#222831",
   text: "#f2f2f2",
-  accent: "#d65a31",
+  accent: "#f72585",
 }
